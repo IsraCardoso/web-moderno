@@ -691,3 +691,35 @@ const mult = function mult(x, y) {
 }
 console.log(mult(3, 4))
 /* -------------------------------------------------------------------------- */
+//closure é o escopo criado quando uma função é declarada
+//Esse escopo permite a função acessar e manipular variáveis externas à função
+const valor = 'Global'
+
+function minhaFuncao() {
+	const valor = 'Local'
+    console.log(valor)
+}
+minhaFuncao()
+
+function minhaFuncao2() {
+    console.log(valor)
+}
+minhaFuncao2()
+
+function exec() {
+    const valor = 'Local'
+    minhaFuncao()
+}
+
+exec()
+/* -------------------------------------------------------------------------- */
+// Factory simples
+function criarPessoa() {
+	return {
+			nome: 'Ana',
+			sobrenome: 'Silva'
+	}
+}
+
+console.log(criarPessoa())
+/* -------------------------------------------------------------------------- */
