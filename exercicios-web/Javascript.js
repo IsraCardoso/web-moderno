@@ -476,250 +476,365 @@ console.log(soma("a", "b", "c"));
 /* -------------------------------------------------------------------------- */
 // estrategia 1 para gerar valor padrão
 function soma1(a, b, c) {
-	a = a || 1
-	b = b || 1
-	c = c || 1
-	return a + b + c
+	a = a || 1;
+	b = b || 1;
+	c = c || 1;
+	return a + b + c;
 }
 
-console.log(soma1(), soma1(3), soma1(1, 2, 3), soma1(0, 0, 0))
+console.log(soma1(), soma1(3), soma1(1, 2, 3), soma1(0, 0, 0));
 
 // estrategia 2, 3 e 4 para gerar valor padrão
 function soma2(a, b, c) {
-	a = a !== undefined ? a : 1
-	b = 1 in arguments ? b : 1
-	c = isNaN(c) ? 1 : c
-	return a + b + c
+	a = a !== undefined ? a : 1;
+	b = 1 in arguments ? b : 1;
+	c = isNaN(c) ? 1 : c;
+	return a + b + c;
 }
 
-console.log(soma2(), soma2(3), soma2(1, 2, 3), soma2(0, 0, 0))
+console.log(soma2(), soma2(3), soma2(1, 2, 3), soma2(0, 0, 0));
 
 // valor padrão do es2015
 function soma3(a = 1, b = 1, c = 1) {
-	return a + b + c
+	return a + b + c;
 }
 
-console.log(soma3(), soma3(3), soma3(1, 2, 3), soma3(0, 0, 0))
+console.log(soma3(), soma3(3), soma3(1, 2, 3), soma3(0, 0, 0));
 /* -------------------------------------------------------------------------- */
 
 const pessoa = {
-	saudacao: 'Bom dia!',
+	saudacao: "Bom dia!",
 	falar() {
-			console.log(this.saudacao)
-	}
-}
+		console.log(this.saudacao);
+	},
+};
 
-pessoa.falar()
-const falar = pessoa.falar
-falar() // conflito entre paradigmas: funcional e OO
+pessoa.falar();
+const falar = pessoa.falar;
+falar(); // conflito entre paradigmas: funcional e OO
 
-const falarDePessoa = pessoa.falar.bind(pessoa)
-falarDePessoa()
+const falarDePessoa = pessoa.falar.bind(pessoa);
+falarDePessoa();
 /* -------------------------------------------------------------------------- */
 function Pessoa() {
-	this.idade = 0
+	this.idade = 0;
 
-	const self = this
-	setInterval(function() {
-			self.idade++
-			console.log(self.idade)
-	}/*.bind(this)*/, 1000)
+	const self = this;
+	setInterval(
+		function () {
+			self.idade++;
+			console.log(self.idade);
+		} /*.bind(this)*/,
+		1000
+	);
 }
 
-new Pessoa
+new Pessoa();
 /* -------------------------------------------------------------------------- */
 let dobro = function (a) {
-	return 2 * a
-}
+	return 2 * a;
+};
 
 dobro = (a) => {
-	return 2 * a 
-}
+	return 2 * a;
+};
 
-dobro = a => 2 * a // return implícito
-console.log(dobro(Math.PI))
+dobro = (a) => 2 * a; // return implícito
+console.log(dobro(Math.PI));
 
 let ola = function () {
-	return 'Olá'
-}
+	return "Olá";
+};
 
-ola = () => 'Olá'
-ola = _ => 'Olá' // possui um param
-console.log(ola())
+ola = () => "Olá";
+ola = (_) => "Olá"; // possui um param
+console.log(ola());
 /* -------------------------------------------------------------------------- */
 function Pessoa() {
-	this.idade = 0
+	this.idade = 0;
 
 	setInterval(() => {
-			this.idade++
-			console.log(this.idade)
-	}, 1000)
+		this.idade++;
+		console.log(this.idade);
+	}, 1000);
 }
 
-new Pessoa
+new Pessoa();
 /* -------------------------------------------------------------------------- */
 let comparaComThis = function (param) {
-	console.log(this === param)
-}
+	console.log(this === param);
+};
 
-comparaComThis(global)
+comparaComThis(global);
 
-const obj = {}
-comparaComThis = comparaComThis.bind(obj)
-comparaComThis(global)
-comparaComThis(obj)
+const obj = {};
+comparaComThis = comparaComThis.bind(obj);
+comparaComThis(global);
+comparaComThis(obj);
 
-let comparaComThisArrow = param => console.log(this === param)
-comparaComThisArrow(global)
-comparaComThisArrow(module.exports)
+let comparaComThisArrow = (param) => console.log(this === param);
+comparaComThisArrow(global);
+comparaComThisArrow(module.exports);
 
-comparaComThisArrow = comparaComThisArrow.bind(obj)
-comparaComThisArrow(obj)
-comparaComThisArrow(module.exports)
+comparaComThisArrow = comparaComThisArrow.bind(obj);
+comparaComThisArrow(obj);
+comparaComThisArrow(module.exports);
 /* -------------------------------------------------------------------------- */
 const soma = function (x, y) {
-	return x + y
-}
+	return x + y;
+};
 
 const imprimirResultado = function (a, b, operacao = soma) {
-	console.log(operacao(a, b))
-}
+	console.log(operacao(a, b));
+};
 
-imprimirResultado(3, 4)
-imprimirResultado(3, 4, soma)
+imprimirResultado(3, 4);
+imprimirResultado(3, 4, soma);
 imprimirResultado(3, 4, function (x, y) {
-	return x - y
-})
-imprimirResultado(3, 4, (x, y) => x * y)
+	return x - y;
+});
+imprimirResultado(3, 4, (x, y) => x * y);
 
 const pessoa = {
 	falar: function () {
-			console.log('Opa')
+		console.log("Opa");
+	},
+};
+
+pessoa.falar();
+/* -------------------------------------------------------------------------- */
+const fabricantes = ["Mercedes", "Audi", "BMW"];
+
+function imprimir(nome, indice) {
+	console.log(`${indice + 1}. ${nome}`);
+}
+
+fabricantes.forEach(imprimir);
+fabricantes.forEach((fabricante) => console.log(fabricante));
+/* -------------------------------------------------------------------------- */
+const notas = [7.7, 6.5, 5.2, 8.9, 3.6, 7.1, 9.0];
+
+// Sem callback
+let notasBaixas1 = [];
+for (let i in notas) {
+	if (notas[i] < 7) {
+		notasBaixas1.push(notas[i]);
 	}
 }
 
-pessoa.falar()
-/* -------------------------------------------------------------------------- */
-const fabricantes = ["Mercedes", "Audi", "BMW"]
-
-function imprimir(nome, indice) {
-    console.log(`${indice + 1}. ${nome}`)
-}
-
-fabricantes.forEach(imprimir)
-fabricantes.forEach(fabricante => console.log(fabricante))
-/* -------------------------------------------------------------------------- */
-const notas = [7.7, 6.5, 5.2, 8.9, 3.6, 7.1, 9.0]
-
-// Sem callback
-let notasBaixas1 = []
-for (let i in notas) {
-    if (notas[i] < 7) {
-        notasBaixas1.push(notas[i])
-    }
-}
-
-console.log(notasBaixas1)
+console.log(notasBaixas1);
 
 // Com callback
 const notasBaixas2 = notas.filter(function (nota) {
-  return nota < 7
-})
+	return nota < 7;
+});
 
-console.log(notasBaixas2)
+console.log(notasBaixas2);
 
-const notasMenorQue7 = nota => nota < 7
-const notasBaixas3 = notas.filter(notasMenorQue7)
-console.log(notasBaixas3)
+const notasMenorQue7 = (nota) => nota < 7;
+const notasBaixas3 = notas.filter(notasMenorQue7);
+console.log(notasBaixas3);
 
-const notasBaixas4 =notas.filter(notas => notas < 7)
-console.log(notasBaixas4)
+const notasBaixas4 = notas.filter((notas) => notas < 7);
+console.log(notasBaixas4);
 /* -------------------------------------------------------------------------- */
 // Exemplo de callback no browser
-document.getElementsByTagName('body')[0].onclick = function (e) {
-	console.log('O evento ocorreu!')
-}
+document.getElementsByTagName("body")[0].onclick = function (e) {
+	console.log("O evento ocorreu!");
+};
 /* -------------------------------------------------------------------------- */
 function Carro(velocidadeMaxima = 200, delta = 5) {
 	// atributo privado
-	let velocidadeAtual = 0
+	let velocidadeAtual = 0;
 
 	// metodo publico
 	this.acelerar = function () {
-			if (velocidadeAtual + delta <= velocidadeMaxima) {
-					velocidadeAtual += delta
-			} else {
-					velocidadeAtual = velocidadeMaxima
-			}
-	}
+		if (velocidadeAtual + delta <= velocidadeMaxima) {
+			velocidadeAtual += delta;
+		} else {
+			velocidadeAtual = velocidadeMaxima;
+		}
+	};
 
 	// metodo publico
 	this.getVelocidadeAtual = function () {
-			return velocidadeAtual
-	}
+		return velocidadeAtual;
+	};
 }
 
-const uno = new Carro
-uno.acelerar()
-console.log(uno.getVelocidadeAtual())
+const uno = new Carro();
+uno.acelerar();
+console.log(uno.getVelocidadeAtual());
 
-const ferrari = new Carro(350, 20)
-ferrari.acelerar()
-ferrari.acelerar()
-ferrari.acelerar()
-console.log(ferrari.getVelocidadeAtual())
+const ferrari = new Carro(350, 20);
+ferrari.acelerar();
+ferrari.acelerar();
+ferrari.acelerar();
+console.log(ferrari.getVelocidadeAtual());
 
-console.log(typeof Carro)
-console.log(typeof ferrari)
+console.log(typeof Carro);
+console.log(typeof ferrari);
 /* -------------------------------------------------------------------------- */
-console.log(soma(3, 4))
+console.log(soma(3, 4));
 
 // function declaration
 function soma(x, y) {
-    return x + y
+	return x + y;
 }
 
 // function expression
 const sub = function (x, y) {
-    return x - y
-}
-console.log(sub(3, 4))
+	return x - y;
+};
+console.log(sub(3, 4));
 
 // named function expression
 const mult = function mult(x, y) {
-    return x * y
-}
-console.log(mult(3, 4))
+	return x * y;
+};
+console.log(mult(3, 4));
 /* -------------------------------------------------------------------------- */
 //closure é o escopo criado quando uma função é declarada
 //Esse escopo permite a função acessar e manipular variáveis externas à função
-const valor = 'Global'
+const valor = "Global";
 
 function minhaFuncao() {
-	const valor = 'Local'
-    console.log(valor)
+	const valor = "Local";
+	console.log(valor);
 }
-minhaFuncao()
+minhaFuncao();
 
 function minhaFuncao2() {
-    console.log(valor)
+	console.log(valor);
 }
-minhaFuncao2()
+minhaFuncao2();
 
 function exec() {
-    const valor = 'Local'
-    minhaFuncao()
+	const valor = "Local";
+	minhaFuncao();
 }
 
-exec()
+exec();
 /* -------------------------------------------------------------------------- */
 // Factory simples
 function criarPessoa() {
 	return {
-			nome: 'Ana',
-			sobrenome: 'Silva'
+		nome: "Ana",
+		sobrenome: "Silva",
+	};
+}
+
+console.log(criarPessoa());
+
+//factory com objeto literal
+function criarProduto(nome, preco) {
+	return {
+		nome,
+		preco,
+		desconto: 0.1,
+	};
+}
+
+console.log(criarProduto("Notebook", 2199.49));
+console.log(criarProduto("iPad", 1199.49));
+/* -------------------------------------------------------------------------- */
+//clase
+class Pessoa {
+	constructor(nome) {
+		this.nome = nome;
+	}
+	falar() {
+		console.log(`Meu nome é ${this.nome}`);
 	}
 }
 
-console.log(criarPessoa())
+const p1 = new Pessoa("João");
+p1.falar();
+
+//função factory
+const criarPessoa = (nome) => {
+	return {
+		falar: () => console.log(`Meu nome é ${nome}`),
+	};
+};
+
+const p2 = criarPessoa("João");
+p2.falar();
+
+//função construtora
+function Pessoa(nome) {
+	this.nome = nome;
+
+	this.falar = function () {
+		console.log(`Meu nome é ${this.nome}`);
+	};
+}
+
+const p1 = new Pessoa("João");
+p1.falar();
+console.log(p1.nome)(
+	/* -------------------------------------------------------------------------- */
+	// IIFE -> Immediately Invoked Function Expression / Função auto invocada
+
+	function (nome) {
+		//this.nome=nome
+		console.log(`Será executado na hora! ${nome}`);
+		console.log("Foge do escopo mais abrangente!");
+	}
+)("teste");
+console.log(nome); // só funciona se o 'nome' for declarado com o this
 /* -------------------------------------------------------------------------- */
+function getPreco(imposto = 0, moeda = "R$") {
+	return `${this.nome}: ${moeda} ${
+		this.preco * (1 - this.desc) * (1 + imposto)
+	}`;
+}
+
+const produto = {
+	nome: "Notebook",
+	preco: 4589,
+	desc: 0.15,
+	getPreco,
+};
+
+global.preco = 20;
+global.desc = 0.1;
+console.log(getPreco());
+console.log(produto.getPreco());
+console.log(produto.getPreco(0.5, "$"));
+
+const carro = { nome: "carro", preco: 49990, desc: 0.2 };
+
+// console.log(carro.getPreco()) //só funciona se houver o método 'getpreço'no objeto carro.
+
+console.log(getPreco.call(carro));
+console.log(getPreco.apply(carro));
+
+console.log(getPreco.call(carro, 0.17, "$"));
+console.log(getPreco.apply(global, [0.17, "$"]));
+
+/* -------------------------------------------------------------------------- */
+/*                            Orientação a objetos                            */
+/* -------------------------------------------------------------------------- */
+// CÓDIGO NÃO EXECUTÁVEL!!!
+
+// Procedural
+processamento(valor1, valor2, valor3);
+
+// OO
+objeto = {
+	valor1,
+	valor2,
+	valor3,
+	processamento() {
+		// ...
+	},
+};
+
+objeto.processamento(); // Foco passou a ser o objeto
+
+// Principios importantes:
+// 1. abstracao
+// 2. encapsulamento
+// 3. herança (prototype)
+// 4. polimorfismo
