@@ -890,3 +890,121 @@ console.log(carro.condutores);
 console.log(carro.condutores.length);
 
 /* -------------------------------------------------------------------------- */
+// usando a notação literal
+const obj1 = {}
+console.log(obj1)
+
+// Object em JS
+console.log(typeof Object, typeof new Object)
+const obj2 = new Object
+console.log(obj2)
+
+// Funções construtoras
+function Produto(nome, preco, desc) {
+    this.nome = nome
+    this.getPrecoComDesconto = () => {
+        return preco * (1 - desc)
+    }
+}
+
+const p1 = new Produto('Caneta', 7.99, 0.15)
+const p2 = new Produto('Notebook', 2998.99, 0.25)
+console.log(p1.getPrecoComDesconto(), p2.getPrecoComDesconto())
+
+// Função Factory
+function criarFuncionario(nome, salarioBase, faltas) {
+    return {
+        nome,
+        salarioBase,
+        faltas,
+        getSalario() {
+            return (salarioBase / 30) * (30 - faltas)
+        }
+    }
+}
+
+const f1 = criarFuncionario('João', 7980, 4)
+const f2 = criarFuncionario('Maria', 11400, 1)
+console.log(f1.getSalario(), f2.getSalario())
+
+// Object.create
+const filha = Object.create(null)
+filha.nome = 'Ana'
+console.log(filha)
+
+// Um função famosa que retorna Objeto...
+const fromJSON = JSON.parse('{"info": "Sou um JSON"}')
+console.log(fromJSON.info)
+
+/* -------------------------------------------------------------------------- */
+// pessoa -> 123 -> {...}
+const pessoa = { nome: 'Joao' }
+pessoa.nome = 'Pedro'
+console.log(pessoa)
+
+// pessoa -> 456 -> {...}
+// pessoa = { nome: 'Ana' }
+
+Object.freeze(pessoa)
+
+pessoa.nome = 'Maria'
+pessoa.end = 'Rua ABC'
+delete pessoa.nome
+
+console.log(pessoa.nome)
+console.log(pessoa)
+
+const pessoaConstante = Object.freeze({ nome: 'Joao' })
+pessoaConstante.nome = 'Maria'
+console.log(pessoaConstante)
+/* -------------------------------------------------------------------------- */
+// pessoa -> 123 -> {...}
+const pessoa = { nome: 'Joao' }
+pessoa.nome = 'Pedro'
+console.log(pessoa)
+
+// pessoa -> 456 -> {...}
+// pessoa = { nome: 'Ana' }
+
+Object.freeze(pessoa)
+
+pessoa.nome = 'Maria'
+pessoa.end = 'Rua ABC'
+delete pessoa.nome
+
+console.log(pessoa.nome)
+console.log(pessoa)
+
+const pessoaConstante = Object.freeze({ nome: 'Joao' })
+pessoaConstante.nome = 'Maria'
+console.log(pessoaConstante)
+/* -------------------------------------------------------------------------- */
+const a = 1
+const b = 2
+const c = 3
+
+const obj1 = { a: a, b: b, c: c }
+const obj2 = { a, b, c }
+console.log(obj1, obj2)
+
+const nomeAttr = 'nota'
+const valorAttr = 7.87
+
+const obj3 = {}
+obj3[nomeAttr] = valorAttr
+console.log(obj3)
+
+const obj4 = {[nomeAttr]: valorAttr}
+console.log(obj4)
+
+const obj5 = {
+    funcao1: function() {
+        // ...
+    },
+    funcao2() {
+        // ...
+    }
+}
+console.log(obj5)
+/* -------------------------------------------------------------------------- */
+
