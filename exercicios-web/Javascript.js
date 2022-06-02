@@ -1007,4 +1007,206 @@ const obj5 = {
 }
 console.log(obj5)
 /* -------------------------------------------------------------------------- */
+const sequencia = {
+	_valor: 0, // convenção
+	get valor() { return this._valor++ },
+	set valor(valor) { 
+			if(valor > this._valor) {
+					this._valor = valor
+			}
+	}
+}
+console.log(sequencia.valor)
+console.log(sequencia.valor, sequencia.valor)
+sequencia.valor = 1000
+console.log(sequencia.valor, sequencia.valor)
+sequencia.valor = 900
+console.log(sequencia.valor, sequencia.valor)
+/* -------------------------------------------------------------------------- */
+
+const pessoa = {
+	nome: 'Rebeca',
+	idade: 2,
+	peso: 13
+}
+
+console.log(Object.keys(pessoa))
+console.log(Object.values(pessoa))
+console.log(Object.entries(pessoa))
+
+Object.entries(pessoa).forEach((e)=>{
+	console.log(`${e[0]}: ${e[1]}`)
+})
+
+Object.entries(pessoa).forEach(([chave, valor]) => {
+	console.log(`${chave}: ${valor}`)
+})
+
+Object.defineProperty(pessoa, 'dataNascimento', {
+	enumerable: true,
+	writable: false,
+	value: '01/01/2019'
+})
+
+pessoa.dataNascimento = '01/01/2017'
+console.log(pessoa.dataNascimento)
+console.log(Object.keys(pessoa))
+
+// Object.assign (ECMAScript 2015)
+const dest = { a: 1 }
+const o1 = { b: 2 }
+const o2 = { c: 3, a: 4 }
+const obj = Object.assign(dest, o1, o2)
+
+Object.freeze(obj)
+obj.c = 1234
+console.log(obj)
+
+/* -------------------------------------------------------------------------- */
+const ferrari = {
+	modelo: 'F40',
+	velMax: 324
+}
+
+const volvo = {
+	modelo: 'V40',
+	velMax: 200
+}
+
+console.log(ferrari.prototype)
+console.log(ferrari.__proto__)
+console.log(ferrari.__proto__ === Object.prototype)
+console.log(volvo.__proto__ === Object.prototype)
+console.log(Object.prototype.__proto__ === null)
+
+function MeuObjeto() {}
+console.log(typeof Object, typeof MeuObjeto)
+console.log(Object.prototype, MeuObjeto.prototype)
+
+
+// Cadeia de protótipos (prototype chain)
+Object.prototype.attr0 = '0' // não faça isso em casa!
+
+const avo = { attr1: 'A' }
+const pai = { __proto__: avo, attr2: 'B', attr3: '3' }
+const filho = { __proto__: pai, attr3: 'C' }
+console.log(filho.attr0, filho.attr1, filho.attr2, filho.attr3)
+
+const carro = {
+    velAtual: 0,
+    velMax: 200,
+    acelerarMais(delta) {
+        if (this.velAtual + delta <= this.velMax) {
+            this.velAtual += delta
+        } else {
+            this.velAtual = this.velMax
+        }
+    },
+    status() {
+        return `${this.velAtual}Km/h de ${this.velMax}Km/h`
+    }
+}
+
+const ferrari = {
+    modelo: 'F40',
+    velMax: 324 // shadowing
+}
+
+const volvo = {
+    modelo: 'V40',
+    status() {
+        return `${this.modelo}: ${super.status()}`
+    }
+}
+
+Object.setPrototypeOf(ferrari, carro)
+Object.setPrototypeOf(volvo, carro)
+
+console.log(ferrari)
+console.log(volvo)
+
+volvo.acelerarMais(100)
+console.log(volvo.status())
+
+ferrari.acelerarMais(300)
+console.log(ferrari.status())
+
+
+const pai = { nome: 'Pedro', corCabelo: 'preto' }
+
+const filha1 = Object.create(pai)
+filha1.nome = 'Ana'
+console.log(filha1.corCabelo)
+
+const filha2 = Object.create(pai, {
+    nome: { value: 'Bia', writable: false, enumerable: true }
+})
+
+console.log(filha2.nome)
+filha2.nome = 'Carla'
+console.log(`${filha2.nome} tem cabelo ${filha2.corCabelo}`)
+
+console.log(Object.keys(filha1))
+console.log(Object.keys(filha2))
+
+for(let key in filha2) { //retorna os atributos do objeto
+    filha2.hasOwnProperty(key) ?
+        console.log(key) : console.log(`Por herança: ${key}`)
+}
+
+
+function MeuObjeto() {}
+console.log(MeuObjeto.prototype)
+
+const obj1 = new MeuObjeto
+const obj2 = new MeuObjeto
+console.log(obj1.__proto__ === obj2.__proto__)
+console.log(MeuObjeto.prototype === obj1.__proto__)
+
+MeuObjeto.prototype.nome = 'Anônimo'
+MeuObjeto.prototype.falar = function() {
+    console.log(`Bom dia! Meu nome é ${this.nome}!`)
+}
+
+obj1.falar()
+
+obj2.nome = 'Rafael'
+obj2.falar()
+
+const obj3 = {}
+obj3.__proto__ = MeuObjeto.prototype
+obj3.nome = 'Obj3'
+obj3.falar()
+
+// Resumindo a loucura...
+console.log((new MeuObjeto).__proto__ === MeuObjeto.prototype)
+console.log(MeuObjeto.__proto__ === Function.prototype)
+console.log(Function.prototype.__proto__ === Object.prototype)
+console.log(Object.prototype.__proto__ === null)
+
+
+console.log(typeof String)
+console.log(typeof Array)
+console.log(typeof Object)
+
+String.prototype.reverse = function () {
+    return this.split('').reverse().join('')
+}
+
+console.log('Escola Cod3r'.reverse())
+
+Array.prototype.first = function() {
+    return this[0]
+}
+
+console.log([1, 2, 3, 4, 5].first())
+console.log(['a', 'b', 'c'].first())
+
+String.prototype.toString = function () {
+    return 'Lascou tudo'
+}
+
+console.log('Escola Cod3r'.reverse())
+
+/* -------------------------------------------------------------------------- */
 
