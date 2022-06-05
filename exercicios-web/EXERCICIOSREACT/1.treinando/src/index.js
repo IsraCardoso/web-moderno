@@ -11,13 +11,16 @@ const elemento = <h1>Olá React!</h1>;
 const componente = <BomDia nome="Israel" idade={10} />;
 const multiplos = <Multiplos.BoaTarde nome="Israel" />;
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const sobrenome = 'TESTE'
 root.render(
 	<>
 		<Pai nome={1} sobrenome={2}>
 			<Filho />
-			<Filho sobrenome="teste2"  />
+			<Filho nome={'teste2'} sobrenome="teste2"  />
 			<Filho nome="teste3"  />
 			<Filho nome="teste4"  />
 		</Pai>
 	</>
 );
+
+

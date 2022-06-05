@@ -1,5 +1,7 @@
 import React from "react";
 import childrenWithProps from "../utils/ChildrenWithProps";
+import Filho from "./Filho";
+
 
 export default function Pai(props) {
 	return (
@@ -9,7 +11,7 @@ export default function Pai(props) {
 			</h1>
 			<h2>Filhos</h2>
 			<ul>
-        {childrenWithProps(props)}
+        {React.cloneElement(props.children, { ...props })}
 			</ul>
 		</>
 	);
