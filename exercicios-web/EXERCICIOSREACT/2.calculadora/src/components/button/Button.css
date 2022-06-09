@@ -11,3 +11,27 @@
   border-bottom: var(--border-button);
   outline: none;
 }
+
+.button:active{
+  filter: brightness(90%);
+
+}
+
+.button.double {
+  grid-column: span 2;
+}
+
+.button.triple {
+  grid-column: span 3;
+  border-right: solid 0,5px #f0f0f0
+}
+
+.button.operation{
+  background-color: #fa8231;
+  color: #fff;
+}
+
+.button.operation:active{
+  filter:brightness(110%);
+
+}
